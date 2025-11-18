@@ -9,65 +9,67 @@
 </head>
 <body class="bg-light">
 
-    <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Helpdesk Billing</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/billing/add/">Add Billing</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/admin/">Admin</a></li>
-                </ul>
-            </div>
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Helpdesk Billing</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/billing/add/">Add Billing</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/">Admin</a></li>
+            </ul>
         </div>
-    </nav>
-
-    <div class="container bg-white shadow-sm p-4 rounded">
-        <h2 class="mb-4 text-center text-primary">Billing Records</h2>
-
-        {% if billings %}
-        <div class="table-responsive">
-            <table class="table table-striped table-hover align-middle text-center">
-                <thead class="table-dark">
-                    <tr>
-                        <th>#</th>
-                        <th>Ticket ID</th>
-                        <th>Amount (Ksh)</th>
-                        <th>Status</th>
-                        <th>Payment Date</th>
-                        <th>Handled By</th>
-                        <th>Updated</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for bill in billings %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ bill.ticket_id }}</td>
-                        <td>{{ bill.amount }}</td>
-                        <td>
-                            {% if bill.payment_status == "paid" %}
-                                <span class="badge bg-success">Paid</span>
-                            {% elif bill.payment_status == "refunded" %}
-                                <span class="badge bg-warning text-dark">Refunded</span>
-                            {% else %}
-                                <span class="badge bg-secondary">Pending</span>
-                            {% endif %}
-                        </td>
-                        <td>{{ bill.payment_date|date:"M d, Y" }}</td>
-                        <td>{{ bill.handled_by }}</td>
-                        <td>{{ bill.updated_at|date:"M d, Y H:i" }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        {% else %}
-            <div class="alert alert-info text-center">No billing records found.</div>
-        {% endif %}
     </div>
+</nav>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="container bg-white shadow-sm p-4 rounded">
+    <h2 class="mb-4 text-center text-primary">Billing Records</h2>
+
+    {% if billings %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Ticket ID</th>
+                    <th>Ticket Subject</th>
+                    <th>Amount (Ksh)</th>
+                    <th>Status</th>
+                    <th>Payment Date</th>
+                    <th>Handled By</th>
+                    <th>Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bill in billings %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ bill.ticket.id }}</td>
+                    <td>{{ bill.ticket.title }}</td>
+                    <td>{{ bill.amount }}</td>
+                    <td>
+                        {% if bill.payment_status == "paid" %}
+                            <span class="badge bg-success">Paid</span>
+                        {% elif bill.payment_status == "refunded" %}
+                            <span class="badge bg-warning text-dark">Refunded</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ bill.payment_date|date:"M d, Y" }}</td>
+                    <td>{{ bill.handled_by }}</td>
+                    <td>{{ bill.updated_at|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <div class="alert alert-info text-center">No billing records found.</div>
+    {% endif %}
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
