@@ -1,13 +1,11 @@
 from django import forms
-from .models import Ticket, TicketEvent
+from .models import Ticket
 
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ["title", "description", "order_reference", "priority", "assigned_to"]
-
-class CommentForm(forms.ModelForm):
-    class Meta:
-        model = TicketEvent
-        fields = ["message"]
-        widgets = { "message": forms.Textarea(attrs={"rows": 3}) }
+        fields = ['order', 'subject', 'description']
+        widgets = {
+            'subject': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+        }
