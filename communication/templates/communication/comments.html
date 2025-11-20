@@ -64,12 +64,8 @@
         <form method="post" action="">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="ticket" class="form-label">Ticket</label>
-                <select name="ticket" id="ticket" class="form-select" required>
-                    {% for ticket in tickets %}
-                        <option value="{{ ticket.id }}">{{ ticket.title }}</option>
-                    {% endfor %}
-                </select>
+                <label for="ticket" class="form-label">Ticket Number</label>
+                <input type="number" name="ticket" id="ticket" class="form-control" required placeholder="Enter ticket number">
             </div>
             <div class="mb-3">
                 <label for="text" class="form-label">Your Comment</label>
