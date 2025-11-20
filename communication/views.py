@@ -2,7 +2,12 @@ from django.shortcuts import render
 from .models import Comment, Notification
 
 def home(request):
-    return render(request, 'communication/home.html')
+    comments = Comment.objects.all()
+    notifications = Notification.objects.all()
+    return render(request, 'communication/home.html', {
+        'comments': comments,
+        'notifications': notifications
+    })
 
 def comments_list(request):
     comments = Comment.objects.all()

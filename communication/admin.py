@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Ticket, Comments, Notification
+from .models import Ticket, Comment, Notification
 
 # Register your models here.
 admin.site.register(Ticket)
-admin.site.register(Comments)
+admin.site.register(Comment)
 admin.site.register(Notification)

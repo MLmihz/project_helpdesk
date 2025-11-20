@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'billing',
     'tickets',
     'dashboard',
+    'communication',
 ]
 
 MIDDLEWARE = [
