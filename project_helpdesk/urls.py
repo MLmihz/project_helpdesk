@@ -9,5 +9,7 @@ urlpatterns = [
     path('tickets/', include('tickets.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('communication/', include('communication.urls')),
+    path('notifications/', lambda request: __import__('django').http.HttpResponseRedirect('/communication/notifications/')),
     path('', dashboard_home, name='home'),
+    
 ]

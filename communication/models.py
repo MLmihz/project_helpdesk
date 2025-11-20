@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 class Ticket(models.Model):
 
     title = models.CharField(max_length=200)
     description = models.TextField()
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='communication_tickets')
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='communication_tickets')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -13,7 +13,7 @@ class Ticket(models.Model):
     
 class Comment(models.Model):
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name= 'comments')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='commented')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='commented')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -21,7 +21,7 @@ class Comment(models.Model):
         return f'Comment by {self.author.username} on {self.ticket.title}'
     
 class Notification(models.Model):
-    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notifications')
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name='notifications')
     message = models.CharField(max_length=255)
     is_read = models.BooleanField(default=False)
