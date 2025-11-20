@@ -26,6 +26,7 @@
           <li class="nav-item"><a class="nav-link" href="/communication/">Communication</a></li>
           <li class="nav-item"><a class="nav-link" href="/billing/">Billing</a></li>
           <li class="nav-item"><a class="nav-link" href="/dashboard/">Dashboard</a></li>
+          </ul>
         </ul>
 
         <ul class="navbar-nav ms-auto">
@@ -40,6 +41,11 @@
               {% endif %}
             </a>
           </li>
+            <li class="nav-item">
+              <a class="nav-link position-relative" href="{% url 'comments_list' %}">
+                <span class="me-1">Comments</span>
+              </a>
+            </li>
           {% if request.user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="/accounts/profile/">
